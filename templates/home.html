@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Tiny URL</title>
+</head>
+<h1>Welcome to Tinyurl!</h1>
+
+{% for message in get_flashed_messages() %}
+    <h2> {{ message }}</h2>
+{% endfor %}
+
+<body>
+<div>
+    <form action="your_url" method="post">
+        <label for="url">Site URL</label>
+        <input type="text" name="url" value="" required>
+        <br>
+        <label for="code">Short Name</label>
+        <input type="text" name="tinyurl" value="" required>
+        <br>
+        <input type="submit" value="TinyUrl">
+    </form>
+</div>
+
+</body>
+</html>
