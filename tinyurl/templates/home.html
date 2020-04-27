@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <title>Simple Tiny Url</title>
+</head>
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <h5 class="my-0 mr-md-auto font-weight-normal">Simple TinyURL</h5>
+  <a class="btn btn-outline-primary" href="{{ url_for('home') }}">New URL</a>
+</div>
+{% for message in get_flashed_messages() %}
+<div class="container text-center">
+  <div class="p-3 mb-2 bg-danger text-white">{{ message }}</div>
+</div>
+<br>
+{% endfor %}
+
+<div class="container">
+  <div class="card-deck mb-3">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal text-center">Website</h4>
+      </div>
+      <div class="card-body">
+        <form action="your_url" method="post">
+          <label for="tinyurl">Short Name</label>
+          <input type="text" class="form-control" name="tinyurl" id="tinyurl" value="" required>
+          <br>
+          <label for="url">Site URL</label>
+          <input type="url" class="form-control" name="url" id="url" value="" required>
+          <br>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Tinyfy</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="static/jquery-3.3.1.slim.min.js"></script>
+<script src="static/popper.min.js"></script>
+<script src="static/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <title>Simple Tiny Url</title>
+</head>
+<body>
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Simple TinyURL</h5>
+    <a class="btn btn-outline-primary" href="{{ url_for('home') }}">New Tinyurl</a>
+  </div>
+<div class="container text-center">
+  <h1 class="jumbotron-heading">Tinyurl Created</h1>
+  <input class="lead" id="new_url" value="{{ url_for('redirect_to_url', tinyurl=tinyurl, _external=True) }}" readonly>
+</div>
+</body>
+</html>

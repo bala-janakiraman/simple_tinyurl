@@ -1,19 +1,14 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, abort
-import json
-import os.path
+from flask import Flask, render_template, request, flash, redirect, url_for, abort, g
+from redis import Redis
 
 app = Flask(__name__)
 app.secret_key = "dummysecret"
 
-url_file_path = os.getcwd()
 
-
-def get_urls_dict():
-    urls = {}
-    if os.path.exists(url_file_path + '/urls.json'):
-        with open('urls.json', 'r') as url_file:
-            urls = json.load(url_file)
-    return urls
+def get_redis():
+    if not hasattr(g, 'redis'):
+        g.redis = Redis(host="redis", db=0, socket_timeout=5)
+    return g.redis
 
 
 @app.route('/')
@@ -23,28 +18,26 @@ def home():
 
 @app.route('/your_url', methods=['GET', 'POST'])
 def your_url():
-    urls = {}
+    redis = get_redis()
+
     if request.method == 'POST':
         key = request.form['tinyurl']
 
-        urls = get_urls_dict()
-
-        if key in urls.keys():
+        if redis.get(key):
             flash('Short name already exist, Try a different short name')
             return redirect(url_for('home'))
 
-        with open('urls.json', 'w') as url_file:
-            urls[key] = {'url': request.form['url']}
-            json.dump(urls, url_file)
+        redis.set(key, request.form['url'])
 
         return render_template('your_url.html', tinyurl=request.form['tinyurl'], full_url=request.form['url'])
 
 
 @app.route('/<string:tinyurl>')
 def redirect_to_url(tinyurl):
-    urls = get_urls_dict()
-    if tinyurl in urls.keys():
-        return redirect(urls[tinyurl]['url'])
+    redis = get_redis()
+    site_url = redis.get(tinyurl)
+    if site_url:
+        return redirect(site_url)
     return abort(404)
 
 
