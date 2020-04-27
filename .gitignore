@@ -1,5 +1,7 @@
 .idea/*
 Pip*
+.DS_Store
+.idea
 
 *.pyc
 *.pyo
