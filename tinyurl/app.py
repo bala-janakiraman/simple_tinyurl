@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, abort, g
+from flask import Flask, render_template, request, flash, redirect, url_for, abort, g, Response, jsonify
 from redis import Redis
 
 app = Flask(__name__)
@@ -10,6 +10,9 @@ def get_redis():
         g.redis = Redis(host="redis", db=0, socket_timeout=5)
     return g.redis
 
+@app.route('/health')
+def healthcheck():
+    return jsonify({"status": "Up"}),200
 
 @app.route('/')
 def home():

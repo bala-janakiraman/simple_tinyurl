@@ -8,13 +8,13 @@ ex `'go' --> http://google.com`
 * Redirects using the shortname/codes  
 ex `http://localhost/go --> google.com`
 
-###### Running Updates
-Check change log
 
-###### To play
-* Clone the repo
-* Cd to the repo
-* Open Terminal and `docker-compose up`
+### Playing around
+Requirements - Docker and docker-compose
+
+`git clone <clone link>`  
+ `cd simple_tinyurl`  
+ `docker-compose up`
 
 Now you can access your own tinyurl site on `localhost`
 
@@ -22,6 +22,7 @@ Now you can access your own tinyurl site on `localhost`
 * ~~Dockerize~~
 * ~~Implement redis~~
 * Autogenerate Tinyurls
+* swagger page
 * Scaling
 * Monitoring, operations and visualization
 * etc
