@@ -28,7 +28,4 @@ ADD . /app
 # Expose port to docker network alone
 EXPOSE 5000
 
-COPY bootstrap.sh /
-RUN chmod +x /bootstrap.sh
-
 CMD uwsgi --ini uwsgi.ini
