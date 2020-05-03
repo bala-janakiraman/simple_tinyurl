@@ -1,9 +1,9 @@
 FROM python:3.8-slim
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /tinyurl
+WORKDIR /tinyurl
 
-ADD requirements.txt /app/requirements.txt
+ADD requirements.txt /tinyurl/requirements.txt
 
 # Install build dependencies to compile uWsgi. Remove compilation dependencies once done to keep image size small.
 RUN set -ex \
@@ -23,7 +23,7 @@ RUN set -ex \
 RUN pip3 install -r requirements.txt
 
 # Copy app files
-ADD . /app
+ADD . /tinyurl
 
 # Expose port to docker network alone
 EXPOSE 5000

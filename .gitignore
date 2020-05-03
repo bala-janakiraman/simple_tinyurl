@@ -5,3 +5,4 @@ Pip*
 
 *.pyc
 *.pyo
+*/venv/*
